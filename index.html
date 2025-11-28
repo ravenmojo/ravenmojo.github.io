@@ -14,24 +14,25 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            /* YOUR UPLOADED FILE */
+            /* NEW IMAGE FILE */
             --bg-image: url('background2.jpg'); 
             
-            /* REFINED PALETTE FOR NATURAL ROAD IMAGE */
-            /* Darker glass to contrast with bright sky clouds */
-            --glass-bg: rgba(18, 20, 24, 0.85); 
+            /* FOREST & AUTUMN PALETTE */
+            
+            /* Deep Forest Green/Grey for the glass background */
+            --glass-bg: rgba(20, 25, 20, 0.85); 
             
             /* Lighter glass for cards */
-            --glass-card: rgba(255, 255, 255, 0.05);
+            --glass-card: rgba(255, 255, 255, 0.06);
             
             /* Subtle borders */
-            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.1);
             
-            /* ACCENT: Warm Gold/Sand to match the sunset clouds */
-            --accent-color: #E0C097; 
+            /* ACCENT: Autumn Gold / Dried Leaf Orange */
+            --accent-color: #E09F3E; 
             
-            --text-light: #F5F7FA;
-            --text-dim: #D1D5DB; /* Slightly brighter for readability */
+            --text-light: #F1F3F0;
+            --text-dim: #C0C5BE;
             --white: #ffffff;
         }
 
@@ -49,10 +50,14 @@
             font-family: 'Merriweather', serif;
             color: var(--text-light);
             line-height: 1.8;
-            /* Parallax Background Setup */
+            
+            /* --- BACKGROUND FIX --- */
             background-image: var(--bg-image);
-            background-size: cover;
-            background-position: center bottom; /* Anchors the road to the bottom */
+            background-size: cover; /* Ensures image covers the screen */
+            
+            /* CHANGED TO CENTER: This fixes the "only seeing bottom" issue */
+            background-position: center center; 
+            
             background-attachment: fixed; 
             background-repeat: no-repeat;
             overflow-x: hidden;
@@ -81,8 +86,8 @@
 
         /* --- NAVIGATION --- */
         header {
-            /* Dark solid-ish header to stand out against sky */
-            background-color: rgba(10, 12, 15, 0.9); 
+            /* Dark green header */
+            background-color: rgba(15, 20, 15, 0.95); 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             position: sticky;
@@ -138,7 +143,7 @@
             display: flex;
             align-items: center;
             gap: 4rem;
-            min-height: 85vh; /* Slightly shorter to show more road */
+            min-height: 85vh; 
         }
 
         .hero-text { flex: 1; }
@@ -148,14 +153,14 @@
             color: var(--white);
             margin-bottom: 1rem;
             line-height: 1.2;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.7); /* Stronger shadow for readability */
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
 
         .hero .subtitle {
             font-size: 1.4rem;
             color: var(--accent-color);
             margin-bottom: 2rem;
-            font-weight: 400;
+            font-weight: 600;
             text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
 
@@ -163,18 +168,19 @@
             font-size: 1.1rem;
             margin-bottom: 2.5rem;
             color: var(--text-light);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Ensures text pops off background */
-            background: rgba(0,0,0,0.2); /* Subtle backing for text */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            /* Added a backing to ensure text is readable over the complex image */
+            background: rgba(0,0,0,0.3); 
             padding: 1rem;
             border-radius: 8px;
-            backdrop-filter: blur(2px);
+            border-left: 3px solid var(--accent-color);
             display: inline-block;
         }
 
         /* BUTTON STYLES */
         .btn {
             display: inline-block;
-            background: rgba(224, 192, 151, 0.15); /* Matches Accent */
+            background: rgba(224, 159, 62, 0.15); /* Matches Accent */
             backdrop-filter: blur(5px);
             border: 1px solid var(--accent-color);
             color: var(--accent-color);
@@ -189,7 +195,7 @@
         .btn:hover { 
             background-color: var(--accent-color);
             color: #1a1a1a;
-            box-shadow: 0 0 20px rgba(224, 192, 151, 0.4);
+            box-shadow: 0 0 20px rgba(224, 159, 62, 0.4);
         }
 
         /* PHOTO STYLING */
@@ -204,8 +210,8 @@
             height: 320px;
             object-fit: cover;
             border-radius: 50%;
-            border: 6px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 6px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
             filter: grayscale(100%) contrast(1.1);
             transition: all 0.5s ease;
         }
@@ -221,7 +227,7 @@
             padding: 6rem 2rem; 
         }
 
-        /* Glass Container - Darker for this image */
+        /* Glass Container - Dark Forest Vibe */
         .glass-container {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -229,7 +235,7 @@
             padding: 4rem 2rem;
             border-top: 1px solid var(--glass-border);
             border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
         }
         
         .section-title {
@@ -318,8 +324,8 @@
             height: 20px;
             background: var(--accent-color);
             border-radius: 50%;
-            border: 4px solid #1B263B;
-            box-shadow: 0 0 10px rgba(224, 192, 151, 0.5);
+            border: 4px solid #141914; /* Matches dark bg */
+            box-shadow: 0 0 10px rgba(224, 159, 62, 0.5);
         }
 
         .timeline-date {
@@ -392,8 +398,8 @@
 
         /* --- FOOTER --- */
         footer {
-            /* Black background matches the asphalt road at bottom of img */
-            background: rgba(5, 5, 5, 0.95);
+            /* Very dark footer to ground the page */
+            background: rgba(10, 12, 10, 0.95);
             color: var(--text-dim);
             text-align: center;
             padding: 4rem 1rem;

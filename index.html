@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souradeep Satpathy | Research Scholar</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            /* Palette adapted for Dark/Glass Theme */
+            --bg-image: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2613&auto=format&fit=crop'); /* Placeholder City Image */
+            --glass-bg: rgba(20, 25, 40, 0.75); /* Dark semi-transparent */
+            --glass-card: rgba(255, 255, 255, 0.08); /* Lighter glass for cards */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-blue: #4CC9F0;
+            --text-light: #F5F7FA;
+            --text-dim: #B8C1EC;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            color: var(--text-light);
+            line-height: 1.8;
+            /* Parallax Background Setup */
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, nav a, .btn {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- SCROLL ANIMATION CLASSES --- */
+        .hidden-el {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+        
+        .show-el {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            background-color: rgba(20, 25, 40, 0.85); /* Dark Glass */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--accent-blue); }
+        
+        /* Underline animation for nav */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-blue);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            min-height: 90vh;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--accent-blue);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-dim);
+        }
+
+        /* BUTTON STYLES (Glassy) */
+        .btn {
+            display: inline-block;
+            background: rgba(76, 201, 240, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .btn:hover { 
+            background-color: var(--accent-blue);
+            color: #1a1a1a;
+            box-shadow: 0 0 20px rgba(76, 201, 240, 0.4);
+        }
+
+        /* PHOTO STYLING */
+        .hero-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img img {
+            width: 320px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 50%;
+            /* Glass border effect */
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            filter: grayscale(100%) contrast(1.1);
+            transition: all 0.5s ease;
+        }
+
+        .hero-img img:hover { 
+            filter: grayscale(0%);
+            transform: scale(1.02);
+            border-color: var(--accent-blue);
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section { 
+            padding: 6rem 2rem; 
+            /* To ensure background is visible, we don't set bg color here */
+        }
+
+        /* Glass Container for Sections */
+        .glass-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--white);
+            margin-bottom: 3.5rem;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent-blue);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .content-wrapper { max-width: 900px; margin: 0 auto; }
+
+        /* --- ABOUT SECTION --- */
+        .about-card {
+            background: var(--glass-card);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .about-card p { margin-bottom: 1.5rem; color: var(--text-dim); }
+        .about-card strong { color: var(--white); }
+
+        .interests {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 2.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .interest-item { 
+            text-align: center; 
+            font-size: 0.9rem;
+            color: var(--white);
+            transition: transform 0.3s;
+        }
+        .interest-item:hover { transform: translateY(-5px); }
+
+        .interest-item i {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- CV TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            border: 4px solid #1B263B; /* Matches dark bg */
+            box-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+
+        .timeline-date {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .timeline-place {
+            font-style: italic;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item p { color: var(--text-dim); }
+
+        /* --- PROJECTS GRID --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--glass-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .project-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: var(--accent-blue);
+        }
+
+        .project-img {
+            height: 180px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+        }
+
+        .project-info { padding: 1.5rem; }
+
+        .project-info h3 {
+            color: var(--white);
+            margin-bottom: 0.8rem;
+            font-size: 1.25rem;
+        }
+
+        .project-info p { font-size: 0.95rem; color: var(--text-dim); }
+
+        /* --- FOOTER --- */
+        footer {
+            background: rgba(10, 15, 25, 0.95);
+            color: var(--text-dim);
+            text-align: center;
+            padding: 4rem 1rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .social-icons { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+
+        .social-icons a {
+            color: var(--white);
+            background: rgba(255,255,255,0.05);
+            width: 45px;
+            height: 45px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 8px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .social-icons a:hover { 
+            background: var(--accent-blue);
+            color: #1a1a1a;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent-blue);
+        }
+        
+        .email-link { 
+            color: var(--accent-blue); 
+            margin-top: 1rem; 
+            display: block;
+            font-weight: 600;
+        }
+        
+        .footer-credit {
+            font-size: 0.8rem; 
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 2rem;}
+            .hero-img img { width: 250px; height: 250px; }
+            .nav-links { display: none; } /* Keeping simple for now */
+            .timeline::before { left: 10px; }
+            .timeline-item { padding-left: 40px; }
+            .timeline-dot { left: 1px; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Souradeep Satpathy</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#cv">CV</a>
+                <a href="#projects">Research</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero hidden-el">
+        <div class="hero-text">
+            <h1>Research Scholar</h1>
+            <h2 class="subtitle">Indian Institute of Technology Kharagpur</h2>
+            <p>I am starting my career in the interdisciplinary field of Energy Science and Engineering. Specializing in computational modelling and charge separation.</p>
+            <a href="#cv" class="btn">View Curriculum Vitae</a>
+        </div>
+        <div class="hero-img">
+            <img src="main_pic.png" alt="Souradeep Satpathy">
+        </div>
+    </section>
+
+    <div class="glass-container">
+        <section id="about" class="hidden-el">
+            <h2 class="section-title">About Me</h2>
+            <div class="content-wrapper">
+                <div class="about-card">
+                    <p>I was born in a quaint and pretty place called Hasimara located near the northern tip of West Bengal, India. My schooling, from kindergarten to senior secondary, was from the Holy Cross School Agartala, India.</p>
+                    <p>I moved to Bhubaneswar for my college where I did my 5-year integrated MSc in Physical Sciences at the <strong>National Institute of Science Education and Research (NISER)</strong>.</p>
+                    <p>During and after my integrated master's degree, I worked on research projects at various institutes before joining the <strong>Thermofluidics and Nanotechnology for Sustainable Energy Systems Laboratory</strong>, IIT Kharagpur, for my doctoral studies.</p>
+                    
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
+                    
+                    <p><strong>Personal Interests:</strong> As an avid football enthusiast, I love playing football. Whenever I miss the field too much, I watch the sport. I am also passionate about travel, especially on my motorcycle, and hope to find many more less-explored places.</p>
+                    
+                    <div class="interests">
+                        <div class="interest-item"><i class="fas fa-futbol"></i>Football</div>
+                        <div class="interest-item"><i class="fas fa-motorcycle"></i>Motorcycling</div>
+                        <div class="interest-item"><i class="fas fa-plane"></i>Travel</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cv" class="hidden-el">
+            <h2 class="section-title">Curriculum Vitae</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">July 2024 – Present</div>
+                    <div class="timeline-title">Doctorate (PhD)</div>
+                    <div class="timeline-place">Indian Institute of Technology (IIT) Kharagpur</div>
+                    <p>Focusing on Energy Science and Engineering.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Nov 2021 – April 2023</div>
+                    <div class="timeline-title">Project Associate</div>
+                    <div class="timeline-place">National Institute of Science Education and Research (NISER)</div>
+                    <p>Worked on research projects focusing on physical sciences.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Jul 2018 – Mar 2019</div>
+                    <div class="timeline-title">Short Term Project Fellow</div>
+                    <div class="timeline-place">NISER Bhubaneswar</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">July 2013 – June 2018</div>
+                    <div class="timeline-title">Integrated Masters in Physical Science</div>
+                    <div class="timeline-place">NISER Bhubaneswar</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn">Download Full CV (PDF)</a>
+            </div>
+        </section>
+
+        <section id="projects" class="hidden-el">
+            <h2 class="section-title">Research & Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-globe-americas fa-3x"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>International Sustainability Trade</h3>
+                        <p>A long-term guide for international sustainability trade practices and analysis.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-city fa-3x"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Housing Development</h3>
+                        <p>Supporting housing development in new territories. Analyzing charge separation in interfaces.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-users fa-3x"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Leading Teams</h3>
+                        <p>Leading teams to develop new product concepts and computational modeling of single-layer graphene.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contact">
+        <h3>Souradeep Satpathy</h3>
+        <p>Research Scholar | IIT Kharagpur</p>
+        <a href="mailto:souradeep.s.24@kgpian.iitkgp.ac.in" class="email-link">souradeep.s.24@kgpian.iitkgp.ac.in</a>
+        
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/soura7/"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/soura7.0"><i class="fab fa-facebook-f"></i></a>
+            
+            <a href="https://scholar.google.com/" target="_blank" title="Google Scholar">
+                <i class="fab fa-google-scholar"></i>
+            </a>
+        </div>
+        <p class="footer-credit">&copy; 2025 Souradeep Satpathy. Hosted on GitHub Pages.</p>
+    </footer>
+
+    <script>
+        // This script handles the smooth reveal animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                // If the element is visible in the viewport
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show-el'); // Add the class that makes it visible
+                }
+            });
+        });
+
+        // Target all elements with the 'hidden-el' class
+        const hiddenElements = document.querySelectorAll('.hidden-el');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
